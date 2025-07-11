@@ -288,5 +288,15 @@ pub async fn step_execution_tool(session_id: String) -> Result<ToolResponseConte
 )]
 pub async fn next_execution_tool(session_id: String) -> Result<ToolResponseContent> {
     let ret = GDB_MANAGER.next_execution(&session_id).await?;
-    Ok(tool_text_content!(format!("Stepped over next line: {}", ret)))
+#[tool(
+    name = "modify_variable",
+    description = "Modify a variable's value in the current GDB session",
+    params(
+        session_id = "The ID of the GDB session",
+        expression = "The expression to evaluate, e.g. 'variable=value'"
+    )
+)]
+pub async fn modify_variable_tool(session_id: String, expression: String) -> Result<ToolResponseContent> {
+    let ret = GDB_MANAGER.modify_variable(&session_id, expression).await?;
+    Ok(tool_text_content!(format!("Modified variable: {}", ret)))
 }

@@ -419,6 +419,11 @@ impl GDBManager {
     pub async fn next_execution(&self, session_id: &str) -> AppResult<String> {
         let response = self.send_command_with_timeout(session_id, &MiCommand::exec_next()).await?;
 
+    /// Modify variable value
+    pub async fn modify_variable(&self, session_id: &str, expression: String) -> AppResult<String> {
+        let command = MiCommand::data_evaluate_expression(expression);
+        let response = self.send_command_with_timeout(session_id, &command).await?;
+
         Ok(response.results.to_string())
     }
 }

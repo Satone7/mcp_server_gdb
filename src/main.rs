@@ -622,4 +622,5 @@ fn register_tools(builder: ServerProtocolBuilder) -> ServerProtocolBuilder {
         .register_tool(tools::GetRegistersTool::tool(), tools::GetRegistersTool::call())
         .register_tool(tools::GetRegisterNamesTool::tool(), tools::GetRegisterNamesTool::call())
         .register_tool(tools::ReadMemoryTool::tool(), tools::ReadMemoryTool::call())
+        .register_tool(tools::ModifyVariableTool::tool(), tools::ModifyVariableTool::call())
 }
